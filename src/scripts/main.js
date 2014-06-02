@@ -1,5 +1,7 @@
-(function(win, doc){
+;(function(win){
   'use strict';
+
+  var $ = require('jquery')
 
   var WS = win.WS = win.WS || {}
 
@@ -22,4 +24,4 @@
     console.log(result.data)
   })
 
-})(window, window.document)
+})(window)
