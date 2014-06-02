@@ -2,8 +2,7 @@
   'use strict';
 
   var $ = require('jquery')
-
-  var WS = win.WS = win.WS || {}
+    , WS = win.WS = win.WS || {}
 
   WS.version = 0.1
   WS.apiUrl = 'http://localhost:5000'

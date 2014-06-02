@@ -1,7 +1,12 @@
 var gulp  = require('gulp')
   , clean = require('gulp-clean')
+  , paths = require('./paths')
 
 module.exports = function() {
-  return gulp.src(['dist/assets/css', 'dist/assets/js', 'dist/assets/img'], {read: false})
+  return gulp.src([
+        paths.dist.stylesheets
+      , paths.dist.scripts
+      , paths.dist.images
+    ], {read: false})
     .pipe(clean())
 }
