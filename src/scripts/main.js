@@ -1,26 +1,21 @@
-;(function(win){
+;(function(){
   'use strict';
 
-  var $ = require('jquery')
-    , WS = win.WS = win.WS || {}
+  var $             = require('jquery')
+    , _             = require('lodash')
+    , apiRequest    = require('./api')
+    , placeTemplate = _.template($('#js-index-place').html())
+    , $placeholders = $('.row.placeholders')
 
-  WS.version = 0.1
-  WS.apiUrl = 'http://localhost:5000'
+  apiRequest('/places').done(displayPlaces)
 
-  WS.apiRequest = function(endpoint, method, data) {
-    endpoint = endpoint || '/'
-    method = method || 'GET'
-    data = data || {}
-    return $.ajax({
-        url: WS.apiUrl + endpoint
-      , type: method
-      , data: data
-      , dataType: 'json'
+  function displayPlaces(dataP) {
+    var places = dataP.data
+      , str = ''
+    $.each(places, function(i, place) {
+      str += placeTemplate(place)
     })
+    $placeholders.html(str)
   }
 
-  WS.apiRequest().done(function(result) {
-    console.log(result.data)
-  })
-
-})(window)
+})()
