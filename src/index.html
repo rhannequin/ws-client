@@ -8,6 +8,8 @@
     <link href="assets/css/main.css" rel="stylesheet">
   </head>
   <body>
+
+    <!-- Header -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -41,9 +43,14 @@
             <li><a href="#">Places</a></li>
           </ul>
         </div>
+        <!-- Content -->
         <div class="js-main col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"></div>
       </div>
     </div>
+
+
+
+    <!-- Templates -->
 
     <script id="js-page" type="text/x-template">
     <h1 class="page-header"><%= title %></h1>
@@ -63,14 +70,33 @@
     </script>
 
     <script id="js-index-place-item" type="text/x-template">
-    <p>
-      <span class="text-muted"><%= description %></span>
-    </p>
-    <p>
-      <span class="text-muted"><%= address %></span>
-    </p>
+    <div class="col-md-4">
+      <h2>Description</h2>
+      <p>
+        <span class="text-muted"><%= place.description %></span>
+      </p>
+      <p>
+        <span class="text-muted"><%= place.address %></span>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h2>Town</h2>
+      <p>
+        <a class="js-town-item" href="/towns/<%= town.id %>"><%= town.name %></a>
+      </p>
+      <p>
+        Population: <%= town.population %> people
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h2>Country</h2>
+      <p>
+        <a href="/countries/<%= country.id %>"><%= country.name %></a>, <%= country.continent %>
+      </p>
+    </div>
     </script>
 
     <script src="assets/js/main.js"></script>
+
   </body>
 </html>
