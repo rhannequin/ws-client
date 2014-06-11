@@ -8,8 +8,26 @@ module.exports = {
 }
 
 function launch() {
+  // Sidebar
+  $('.nav-sidebar').find('a.js-sidebar').on('click', showFromSidebarEvt)
+
   $('body').on('click', '.js-place-item', showPlaceEvt)
   $('body').on('click', '.js-town-item', showTownEvt)
+}
+
+function showFromSidebarEvt(e) {
+  e.preventDefault()
+  var href = $(e.currentTarget).attr('href')
+  switch(href) {
+    case '/places':
+      loaders.loadPlaces()
+      break
+    case '/towns':
+      loaders.loadTowns()
+      break
+    default:
+      loaders.loadPlaces()
+  }
 }
 
 function showPlaceEvt(e) {

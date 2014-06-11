@@ -8,13 +8,18 @@ var $ = require('jquery')
 module.exports = {
     renderPlace: renderPlace
   , renderPlaces: renderPlaces
+  , renderTowns: renderTowns
 }
+
 
 function renderPage(title, content) {
   var $main = $('.js-main')
     , pageTemplate = _.template($('#js-page').html())
   $main.html(pageTemplate({title: title, content: content}))
 }
+
+
+// PLACES
 
 function renderPlace(dataP) {
   var place = dataP.data
@@ -34,6 +39,20 @@ function renderPlaces(dataP) {
   $.each(places, function(i, place) {
     str += placeItemListTemplate(place)
   })
-  renderPage('Homepage', str)
+  renderPage('Places', str)
+  $loader().hide()
+}
+
+
+// TOWNS
+
+function renderTowns(dataT) {
+  var towns = dataT.data
+    , townItemListTemplate = _.template($('#js-index-town-item-list').html())
+    , str = ''
+  $.each(towns, function(i, town) {
+    str += townItemListTemplate(town)
+  })
+  renderPage('Towns', str)
   $loader().hide()
 }

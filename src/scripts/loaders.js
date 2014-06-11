@@ -8,7 +8,11 @@ var apiRequest = require('./api')
 module.exports = {
     loadPlaces: loadPlaces
   , loadPlace: loadPlace
+  , loadTowns: loadTowns
 }
+
+
+// PLACES
 
 function loadPlaces() {
   $loader().show()
@@ -18,4 +22,12 @@ function loadPlaces() {
 function loadPlace(url) {
   $loader().show()
   apiRequest(url).done(renderers.renderPlace)
+}
+
+
+// TOWNS
+
+function loadTowns() {
+  $loader().show()
+  apiRequest('/towns').done(renderers.renderTowns)
 }

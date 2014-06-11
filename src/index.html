@@ -29,7 +29,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/">Home</a></li>
-            <li><a href="#">Places</a></li>
+            <li><a href="/places">Places</a></li>
           </ul>
         </div>
       </div>
@@ -39,8 +39,15 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="#">Places</a></li>
+            <li class="active">
+              <a class="js-sidebar" href="/">Home</a>
+            </li>
+            <li>
+              <a class="js-sidebar" href="/places">Places</a>
+            </li>
+            <li>
+              <a class="js-sidebar" href="/towns">Towns</a>
+            </li>
           </ul>
         </div>
         <!-- Content -->
@@ -93,6 +100,12 @@
       <p>
         <a href="/countries/<%= country.id %>"><%= country.name %></a>, <%= country.continent %>
       </p>
+    </div>
+    </script>
+
+    <script id="js-index-town-item-list" type="text/x-template">
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <p><%= name %></p>
     </div>
     </script>
 
