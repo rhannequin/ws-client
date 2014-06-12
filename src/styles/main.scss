@@ -67,6 +67,12 @@ body {
 }
 
 
+
+.nav > li.active > a:hover,
+.nav > li.active > a:focus {
+  background-color: #428BCA;
+}
+
 /*
  * Main content
  */

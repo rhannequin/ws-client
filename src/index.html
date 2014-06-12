@@ -28,8 +28,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/">Home</a></li>
-            <li><a href="/places">Places</a></li>
+            <li><a class="js-navbar" href="/">Home</a></li>
+            <li><a class="js-navbar" href="/places">Places</a></li>
+            <li><a class="js-navbar" href="/towns">Towns</a></li>
           </ul>
         </div>
       </div>
@@ -39,13 +40,13 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active">
+            <li class="css-home">
               <a class="js-sidebar" href="/">Home</a>
             </li>
-            <li>
+            <li class="css-places">
               <a class="js-sidebar" href="/places">Places</a>
             </li>
-            <li>
+            <li class="css-towns">
               <a class="js-sidebar" href="/towns">Towns</a>
             </li>
           </ul>
@@ -64,7 +65,11 @@
     <%= content %>
     </script>
 
-    <script id="js-index-place-item-list" type="text/x-template">
+    <script id="js-home" type="text/x-template">
+    <p>Welcome to our app.</<p>
+    </script>
+
+    <script id="js-place-item-list" type="text/x-template">
     <div class="col-xs-6 col-sm-3 placeholder">
       <h4><a class="js-place-item" href="/places/<%= id %>"><%= name %></a></h4>
       <p>
@@ -76,7 +81,7 @@
     </div>
     </script>
 
-    <script id="js-index-place-item" type="text/x-template">
+    <script id="js-place-item" type="text/x-template">
     <div class="col-md-4">
       <h2>Description</h2>
       <p>
@@ -103,10 +108,15 @@
     </div>
     </script>
 
-    <script id="js-index-town-item-list" type="text/x-template">
+    <script id="js-town-item-list" type="text/x-template">
     <div class="col-xs-6 col-sm-3 placeholder">
-      <p><%= name %></p>
+      <p><a class="js-town-item" href="/towns/<%= id %>"><%= name %></a></p>
     </div>
+    </script>
+
+    <script id="js-town-item" type="text/x-template">
+    <p>Population : <%= town.population %></p>
+    <p>Country : <%= country.name %></p>
     </script>
 
     <script src="assets/js/main.js"></script>

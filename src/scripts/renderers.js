@@ -3,19 +3,31 @@
 var $ = require('jquery')
   , _ = require('lodash')
   , selectors = require('./selectors')
+  , $mainContainer = selectors.mainContainer
   , $loader = selectors.gifLoader
+  , $sidebar = selectors.sidebar
 
 module.exports = {
-    renderPlace: renderPlace
+    renderHome: renderHome
+  , renderPlace: renderPlace
   , renderPlaces: renderPlaces
   , renderTowns: renderTowns
+  , renderTown: renderTown
 }
 
 
 function renderPage(title, content) {
-  var $main = $('.js-main')
+  var $main = $mainContainer()
     , pageTemplate = _.template($('#js-page').html())
   $main.html(pageTemplate({title: title, content: content}))
+}
+
+
+function renderHome() {
+  var homeTemplate = _.template($('#js-home').html())
+  renderPage('Homepage', homeTemplate())
+  updateSidebar('home')
+  hideLoader()
 }
 
 
@@ -23,24 +35,25 @@ function renderPage(title, content) {
 
 function renderPlace(dataP) {
   var place = dataP.data
-    , placeItemTemplate = _.template($('#js-index-place-item').html())
-  renderPage(place.name, placeItemTemplate({
+    , placeItemTemplate = _.template($('#js-place-item').html())
+  renderPage('Place: ' + place.name, placeItemTemplate({
       place: place
     , town: place.town
     , country: place.town.country
   }))
-  $loader().hide()
+  hideLoader()
 }
 
 function renderPlaces(dataP) {
   var places = dataP.data
-    , placeItemListTemplate = _.template($('#js-index-place-item-list').html())
+    , placeItemListTemplate = _.template($('#js-place-item-list').html())
     , str = ''
   $.each(places, function(i, place) {
     str += placeItemListTemplate(place)
   })
   renderPage('Places', str)
-  $loader().hide()
+  updateSidebar('places')
+  hideLoader()
 }
 
 
@@ -48,11 +61,36 @@ function renderPlaces(dataP) {
 
 function renderTowns(dataT) {
   var towns = dataT.data
-    , townItemListTemplate = _.template($('#js-index-town-item-list').html())
+    , townItemListTemplate = _.template($('#js-town-item-list').html())
     , str = ''
   $.each(towns, function(i, town) {
     str += townItemListTemplate(town)
   })
   renderPage('Towns', str)
+  updateSidebar('towns')
+  hideLoader()
+}
+
+function renderTown(dataT) {
+  var town = dataT.data
+    , townItemTemplate = _.template($('#js-town-item').html())
+  renderPage('Town: ' + town.name, townItemTemplate({
+      town: town
+    , country: town.country
+  }))
+  hideLoader()
+}
+
+
+// Internal
+
+function updateSidebar(toActive) {
+  var $s = $sidebar()
+    , active = 'active'
+  $s.find('li.' + active).removeClass(active)
+  $s.find('li.css-' + toActive).addClass(active)
+}
+
+function hideLoader() {
   $loader().hide()
 }

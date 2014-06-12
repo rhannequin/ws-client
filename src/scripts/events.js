@@ -8,14 +8,15 @@ module.exports = {
 }
 
 function launch() {
-  // Sidebar
-  $('.nav-sidebar').find('a.js-sidebar').on('click', showFromSidebarEvt)
+  // Menu
+  $('.nav-sidebar').find('a.js-sidebar').on('click', showFromMenuEvt)
+  $('.navbar-nav').find('a.js-navbar').on('click', showFromMenuEvt)
 
   $('body').on('click', '.js-place-item', showPlaceEvt)
   $('body').on('click', '.js-town-item', showTownEvt)
 }
 
-function showFromSidebarEvt(e) {
+function showFromMenuEvt(e) {
   e.preventDefault()
   var href = $(e.currentTarget).attr('href')
   switch(href) {
@@ -26,7 +27,7 @@ function showFromSidebarEvt(e) {
       loaders.loadTowns()
       break
     default:
-      loaders.loadPlaces()
+      loaders.loadHome()
   }
 }
 
@@ -41,5 +42,5 @@ function showTownEvt(e) {
   var href
   e.preventDefault()
   href = $(e.currentTarget).attr('href')
-  console.log('Town url', href)
+  loaders.loadTown(href)
 }

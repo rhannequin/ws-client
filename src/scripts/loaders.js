@@ -6,9 +6,17 @@ var apiRequest = require('./api')
   , $loader = selectors.gifLoader
 
 module.exports = {
-    loadPlaces: loadPlaces
+    loadHome: loadHome
+  , loadPlaces: loadPlaces
   , loadPlace: loadPlace
   , loadTowns: loadTowns
+  , loadTown: loadTown
+}
+
+
+function loadHome() {
+  $loader().show()
+  renderers.renderHome()
 }
 
 
@@ -30,4 +38,9 @@ function loadPlace(url) {
 function loadTowns() {
   $loader().show()
   apiRequest('/towns').done(renderers.renderTowns)
+}
+
+function loadTown(url) {
+  $loader().show()
+  apiRequest(url).done(renderers.renderTown)
 }

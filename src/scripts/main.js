@@ -8,6 +8,6 @@
   eventsManager.launch()
 
   // Launch
-  loaders.loadPlaces()
+  loaders.loadHome()
 
 })()
