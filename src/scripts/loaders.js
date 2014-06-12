@@ -22,9 +22,13 @@ function loadHome() {
 
 // PLACES
 
-function loadPlaces() {
+function loadPlaces(filter) {
+  var url = '/places'
+  if(typeof filter !== 'undefined' && filter.length) {
+    url += '?f=' + filter
+  }
   $loader().show()
-  apiRequest('/places').done(renderers.renderPlaces)
+  apiRequest(url).done(renderers.renderPlaces)
 }
 
 function loadPlace(url) {

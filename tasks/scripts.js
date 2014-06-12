@@ -7,11 +7,8 @@ var gulp       = require('gulp')
   , paths      = require('./paths')
 
 module.exports = function() {
-  return gulp.src(paths.sources.scripts + '**/*.js')
+  return gulp.src(paths.sources.scripts + 'main.js')
     .pipe(plumber())
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('default'))
-    .pipe(concat('main.js'))
     .pipe(browserify(
       opts.minify ? {transform : ['uglifyify']} : {}
     ))

@@ -6,8 +6,9 @@ gulp.task('clean', require(tasks + 'clean'))
 gulp.task('html', require(tasks + 'html'))
 
 // Generated assets
+gulp.task('lint', require(tasks + 'lint'))
 gulp.task('styles', require(tasks + 'styles'))
-gulp.task('scripts', require(tasks + 'scripts'))
+gulp.task('scripts', ['lint'], require(tasks + 'scripts'))
 gulp.task('images', require(tasks + 'images'))
 
 // Server and livereaload

@@ -3,6 +3,7 @@
 var $ = require('jquery')
   , _ = require('lodash')
   , selectors = require('./selectors')
+  , behavors = require('./behaviors')
   , $mainContainer = selectors.mainContainer
   , $loader = selectors.gifLoader
   , $sidebar = selectors.sidebar
@@ -46,14 +47,11 @@ function renderPlace(dataP) {
 
 function renderPlaces(dataP) {
   var places = dataP.data
-    , placeItemListTemplate = _.template($('#js-place-item-list').html())
-    , str = ''
-  $.each(places, function(i, place) {
-    str += placeItemListTemplate(place)
-  })
-  renderPage('Places', str)
+    , placeListTemplate = _.template($('#js-place-list').html())
+  renderPage('Places', placeListTemplate({places: places}))
   updateSidebar('places')
   hideLoader()
+  behavors.placesList()
 }
 
 

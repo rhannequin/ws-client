@@ -69,16 +69,23 @@
     <p>Welcome to our app.</<p>
     </script>
 
-    <script id="js-place-item-list" type="text/x-template">
-    <div class="col-xs-6 col-sm-3 placeholder">
-      <h4><a class="js-place-item" href="/places/<%= id %>"><%= name %></a></h4>
+    <script id="js-place-list" type="text/x-template">
+    <form class="places-form-filter">
       <p>
-        <span class="text-muted"><%= description %></span>
+      <label>Filter:</label> <input type="text">
+      </p>
+    </form>
+    <% _.each(places, function(place) { %>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <h4><a class="js-place-item" href="/places/<%= place.id %>"><%= place.name %></a></h4>
+      <p>
+        <span class="text-muted"><%= place.description %></span>
       </p>
       <p>
-        <span class="text-muted"><%= address %></span>
+        <span class="text-muted"><%= place.address %></span>
       </p>
     </div>
+    <% }) %>
     </script>
 
     <script id="js-place-item" type="text/x-template">
