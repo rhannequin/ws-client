@@ -29,6 +29,9 @@ function showFromMenuEvt(e) {
     case '/places':
       loaders.loadPlaces()
       break
+    case '/places/add':
+      renderers.renderAddPlace()
+      break
     case '/towns':
       loaders.loadTowns()
       break

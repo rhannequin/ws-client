@@ -44,12 +44,21 @@
             <li class="css-home">
               <a class="js-sidebar" href="/">Home</a>
             </li>
+          </ul>
+          <ul class="nav nav-sidebar">
             <li class="css-places">
               <a class="js-sidebar" href="/places">Places</a>
             </li>
+            <li class="css-place-add">
+              <a class="js-sidebar" href="/places/add">Add a Place</a>
+            </li>
+          </ul>
+          <ul class="nav nav-sidebar">
             <li class="css-towns">
               <a class="js-sidebar" href="/towns">Towns</a>
             </li>
+          </ul>
+          <ul class="nav nav-sidebar">
             <li class="css-countries">
               <a class="js-sidebar" href="/countries">Countries</a>
             </li>
@@ -72,6 +81,10 @@
     <script id="js-home" type="text/x-template">
     <p>Welcome to our app.</<p>
     </script>
+
+
+
+    <!-- PLACES -->
 
     <script id="js-place-list" type="text/x-template">
     <form class="places-form-filter">
@@ -98,14 +111,48 @@
     </script>
 
     <script id="js-add-place" type="text/x-template">
-    <form class="add-place">
-      <p><label>Name:</label> <input type="text" name="name"></p>
-      <p><label>Description:</label> <input type="text" name="description"></p>
-      <p><label>Address:</label> <input type="text" name="address"></p>
-      <p><label>Latitude:</label> <input type="text" name="latitude"></p>
-      <p><label>Longitude:</label> <input type="text" name="longitude"></p>
-      <p><label>Town id:</label> <input type="text" name="town_id"></p>
-      <p><input class="btn btn-primary" type="submit" value="Create"></p>
+    <form class="form-horizontal add-place" role="form">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="place-name">Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="place-name" name="name" placeholder="Wonderful name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="place-description">Description</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="place-description" name="description" placeholder="Wonderful description">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="place-address">Address</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="place-address" name="address" placeholder="Wonderful address">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="place-latitude">Latitude</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="place-latitude" name="latitude" placeholder="Wonderful latitude">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="place-longitude">Longitude</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="place-longitude" name="longitude" placeholder="Wonderful longitude">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="place-town_id">Town id</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="place-town_id" name="town_id" placeholder="Wonderful town_id">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </div>
     </form>
     </script>
 
@@ -137,6 +184,7 @@
     </script>
 
 
+
     <!-- TOWNS -->
 
     <script id="js-town-item-list" type="text/x-template">
@@ -149,6 +197,7 @@
     <p>Population: <%= town.population %></p>
     <p>Country: <a class="js-country-item" href="/countries/<%= country.id %>"><%= country.name %></a></p>
     </script>
+
 
 
     <!-- COUNTRIES -->
