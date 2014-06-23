@@ -9,6 +9,7 @@ module.exports = {
     loadHome: loadHome
   , loadPlaces: loadPlaces
   , loadPlace: loadPlace
+  , loadAddPlace: loadAddPlace
   , loadTowns: loadTowns
   , loadTown: loadTown
   , loadCountries: loadCountries
@@ -36,6 +37,16 @@ function loadPlaces(filter) {
 function loadPlace(url) {
   $loader().show()
   apiRequest(url).done(renderers.renderPlace)
+}
+
+function loadPlaceFromAdd(dataP) {
+  var id = dataP.data.place_id
+  loadPlace('/places/' + id)
+}
+
+function loadAddPlace(place) {
+  $loader().show()
+  apiRequest('/places', 'POST', {place: place}).done(loadPlaceFromAdd)
 }
 
 

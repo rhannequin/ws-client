@@ -61,6 +61,7 @@ function renderAddPlace() {
   var addPlaceTemplate = _.template($('#js-add-place').html())
   renderPage('Add Place', addPlaceTemplate())
   hideLoader()
+  behavors.addPlaceForm()
 }
 
 
