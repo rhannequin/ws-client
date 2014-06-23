@@ -97,11 +97,11 @@
 
     <script id="js-add-place" type="text/x-template">
     <form>
-      <p><label>Name :</label> <input type="text"></p>
-      <p><label>Description :</label> <input type="text"></p>
-      <p><label>Address :</label> <input type="text"></p>
-      <p><label>Latitude :</label> <input type="text"></p>
-      <p><label>Longitude :</label> <input type="text"></p>
+      <p><label>Name:</label> <input type="text"></p>
+      <p><label>Description:</label> <input type="text"></p>
+      <p><label>Address:</label> <input type="text"></p>
+      <p><label>Latitude:</label> <input type="text"></p>
+      <p><label>Longitude:</label> <input type="text"></p>
       <p><input class="btn btn-primary" type="submit" value="Create"></p>
     </form>
     </script>
@@ -143,8 +143,8 @@
     </script>
 
     <script id="js-town-item" type="text/x-template">
-    <p>Population : <%= town.population %></p>
-    <p>Country : <a class="js-country-item" href="/countries/<%= country.id %>"><%= country.name %></a></p>
+    <p>Population: <%= town.population %></p>
+    <p>Country: <a class="js-country-item" href="/countries/<%= country.id %>"><%= country.name %></a></p>
     </script>
 
 
@@ -157,8 +157,8 @@
     </script>
 
     <script id="js-country-item" type="text/x-template">
-    <p>Population : <%= country.continent %></p>
-    <p>Country : <%= country.code %></p>
+    <p>Continent: <%= country.continent %></p>
+    <p>Code: <%= country.code %></p>
     </script>
 
     <script src="assets/js/main.js"></script>
