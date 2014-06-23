@@ -12,8 +12,11 @@ module.exports = {
     renderHome: renderHome
   , renderPlace: renderPlace
   , renderPlaces: renderPlaces
+  , renderAddPlace: renderAddPlace
   , renderTowns: renderTowns
   , renderTown: renderTown
+  , renderCountries: renderCountries
+  , renderCountry: renderCountry
 }
 
 
@@ -54,6 +57,12 @@ function renderPlaces(dataP) {
   behavors.placesList()
 }
 
+function renderAddPlace() {
+  var addPlaceTemplate = _.template($('#js-add-place').html())
+  renderPage('Add Place', addPlaceTemplate())
+  hideLoader()
+}
+
 
 // TOWNS
 
@@ -76,6 +85,28 @@ function renderTown(dataT) {
       town: town
     , country: town.country
   }))
+  hideLoader()
+}
+
+
+// COUNTRIES
+
+function renderCountries(dataC) {
+  var countries = dataC.data
+    , townItemListTemplate = _.template($('#js-country-item-list').html())
+    , str = ''
+  $.each(countries, function(i, country) {
+    str += townItemListTemplate(country)
+  })
+  renderPage('Countries', str)
+  updateSidebar('countries')
+  hideLoader()
+}
+
+function renderCountry(dataC) {
+  var country = dataC.data
+    , townItemTemplate = _.template($('#js-country-item').html())
+  renderPage('Country: ' + country.name, townItemTemplate({ country: country }))
   hideLoader()
 }
 

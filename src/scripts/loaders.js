@@ -11,6 +11,8 @@ module.exports = {
   , loadPlace: loadPlace
   , loadTowns: loadTowns
   , loadTown: loadTown
+  , loadCountries: loadCountries
+  , loadCountry: loadCountry
 }
 
 
@@ -47,4 +49,17 @@ function loadTowns() {
 function loadTown(url) {
   $loader().show()
   apiRequest(url).done(renderers.renderTown)
+}
+
+
+// COUNTRIES
+
+function loadCountries() {
+  $loader().show()
+  apiRequest('/countries').done(renderers.renderCountries)
+}
+
+function loadCountry(url) {
+  $loader().show()
+  apiRequest(url).done(renderers.renderCountry)
 }

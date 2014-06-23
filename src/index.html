@@ -31,6 +31,7 @@
             <li><a class="js-navbar" href="/">Home</a></li>
             <li><a class="js-navbar" href="/places">Places</a></li>
             <li><a class="js-navbar" href="/towns">Towns</a></li>
+            <li><a class="js-navbar" href="/countries">Countries</a></li>
           </ul>
         </div>
       </div>
@@ -48,6 +49,9 @@
             </li>
             <li class="css-towns">
               <a class="js-sidebar" href="/towns">Towns</a>
+            </li>
+            <li class="css-countries">
+              <a class="js-sidebar" href="/countries">Countries</a>
             </li>
           </ul>
         </div>
@@ -86,6 +90,20 @@
       </p>
     </div>
     <% }) %>
+    <p>
+    <a href="/places/add" class="btn btn-primary js-place-add-item">Add a Place</a>
+    </p>
+    </script>
+
+    <script id="js-add-place" type="text/x-template">
+    <form>
+      <p><label>Name :</label> <input type="text"></p>
+      <p><label>Description :</label> <input type="text"></p>
+      <p><label>Address :</label> <input type="text"></p>
+      <p><label>Latitude :</label> <input type="text"></p>
+      <p><label>Longitude :</label> <input type="text"></p>
+      <p><input class="btn btn-primary" type="submit" value="Create"></p>
+    </form>
     </script>
 
     <script id="js-place-item" type="text/x-template">
@@ -110,10 +128,13 @@
     <div class="col-md-4">
       <h2>Country</h2>
       <p>
-        <a href="/countries/<%= country.id %>"><%= country.name %></a>, <%= country.continent %>
+        <a class="js-country-item" href="/countries/<%= country.id %>"><%= country.name %></a>, <%= country.continent %>
       </p>
     </div>
     </script>
+
+
+    <!-- TOWNS -->
 
     <script id="js-town-item-list" type="text/x-template">
     <div class="col-xs-6 col-sm-3 placeholder">
@@ -123,7 +144,21 @@
 
     <script id="js-town-item" type="text/x-template">
     <p>Population : <%= town.population %></p>
-    <p>Country : <%= country.name %></p>
+    <p>Country : <a class="js-country-item" href="/countries/<%= country.id %>"><%= country.name %></a></p>
+    </script>
+
+
+    <!-- COUNTRIES -->
+
+    <script id="js-country-item-list" type="text/x-template">
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <p><a class="js-country-item" href="/countries/<%= id %>"><%= name %></a></p>
+    </div>
+    </script>
+
+    <script id="js-country-item" type="text/x-template">
+    <p>Population : <%= country.continent %></p>
+    <p>Country : <%= country.code %></p>
     </script>
 
     <script src="assets/js/main.js"></script>
