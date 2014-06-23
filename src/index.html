@@ -157,29 +157,27 @@
     </script>
 
     <script id="js-place-item" type="text/x-template">
-    <div class="col-md-4">
-      <h2>Description</h2>
-      <p>
-        <span class="text-muted"><%= place.description %></span>
-      </p>
-      <p>
-        <span class="text-muted"><%= place.address %></span>
-      </p>
-    </div>
-    <div class="col-md-4">
-      <h2>Town</h2>
-      <p>
-        <a class="js-town-item" href="/towns/<%= town.id %>"><%= town.name %></a>
-      </p>
-      <p>
-        Population: <%= town.population %> people
-      </p>
-    </div>
-    <div class="col-md-4">
-      <h2>Country</h2>
-      <p>
-        <a class="js-country-item" href="/countries/<%= country.id %>"><%= country.name %></a>, <%= country.continent %>
-      </p>
+    <div class="row">
+      <div class="col-md-6">
+        <p><%= place.description %></p>
+        <p><span class="text-muted"><%= place.address %></span></p>
+      </div>
+      <div class="col-md-6">
+        <div class="col-md-6">
+          <p>
+            <a class="js-town-item" href="/towns/<%= town.id %>"><%= town.name %></a>
+          </p>
+          <p>
+            Population: <%= town.population %> people
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p>
+            <a class="js-country-item" href="/countries/<%= country.id %>"><%= country.name %></a>, <%= country.continent %>
+          </p>
+        </div>
+      </div>
+      <div class="gmaps" id="place-map"></div>
     </div>
     </script>
 
@@ -213,6 +211,7 @@
     <p>Code: <%= country.code %></p>
     </script>
 
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAciVpsNdpy6AlcULnfBXVdaBks3GoOBf0"></script>
     <script src="assets/js/main.js"></script>
 
   </body>

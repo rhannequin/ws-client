@@ -1,9 +1,11 @@
+/*global google:false */
 'use strict';
 
 var $ = require('jquery')
 
 module.exports = {
     placesList: placesList
+  , showPlace: showPlace
   , addPlaceForm: addPlaceForm
 }
 
@@ -15,6 +17,21 @@ function placesList() {
     e.preventDefault()
     $input = $(e.currentTarget).find('input')
     loaders.loadPlaces($input.val())
+  })
+}
+
+function showPlace(place) {
+  var latLng = new google.maps.LatLng(place.latitude, place.longitude)
+    , mapOptions = {
+          center: latLng
+        , zoom: 15
+      }
+    , map
+  map = new google.maps.Map(document.getElementById('place-map'), mapOptions)
+  new google.maps.Marker({
+      position: latLng
+    , map: map
+    , title: place.name
   })
 }
 

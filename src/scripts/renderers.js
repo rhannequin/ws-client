@@ -46,6 +46,7 @@ function renderPlace(dataP) {
     , country: place.town.country
   }))
   hideLoader()
+  behavors.showPlace(place)
 }
 
 function renderPlaces(dataP) {
