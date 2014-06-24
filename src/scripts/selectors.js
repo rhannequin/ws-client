@@ -6,6 +6,7 @@ module.exports = {
     mainContainer: findMainContainer
   , gifLoader: findGifLoader
   , sidebar: findSidebar
+  , findInput: findInput
 }
 
 function findMainContainer() {
@@ -18,4 +19,9 @@ function findGifLoader() {
 
 function findSidebar() {
   return $('.nav.nav-sidebar')
+}
+
+function findInput($form, input, type) {
+  type = type || 'input'
+  return $form.find(type + "[name$='" + input + "']")
 }

@@ -2,6 +2,8 @@
 'use strict';
 
 var $ = require('jquery')
+  , selectors = require('./selectors')
+  , findInput = selectors.findInput
 
 module.exports = {
     placesList: placesList
@@ -27,6 +29,7 @@ function showPlace(place) {
 function addPlaceForm() {
   var loaders = require('./loaders')
     , $form = $('form.add-place')
+  loaders.loadTownsSelect()
   findInput($form, 'address').on('change', function() {
     getLatLngFromAddress($(this).val(), function(lat, lng) {
       findInput($form, 'latitude').val(lat)
@@ -67,7 +70,7 @@ function buildPlaceFormObj($form) {
     , address: findInput($form, 'address').val()
     , latitude: findInput($form, 'latitude').val()
     , longitude: findInput($form, 'longitude').val()
-    , town_id: findInput($form, 'town_id').val()
+    , town_id: findInput($form, 'town_id', 'select').val()
   }
 }
 
@@ -78,8 +81,4 @@ function getLatLngFromAddress(address, cb) {
       cb(location.k, location.A)
     }
   })
-}
-
-function findInput($form, input) {
-  return $form.find("input[name$='" + input + "']")
 }

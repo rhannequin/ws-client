@@ -15,6 +15,7 @@ module.exports = {
   , renderAddPlace: renderAddPlace
   , renderTowns: renderTowns
   , renderTown: renderTown
+  , renderTownsSelect: renderTownsSelect
   , renderCountries: renderCountries
   , renderCountry: renderCountry
 }
@@ -89,6 +90,11 @@ function renderTown(dataT) {
     , country: town.country
   }))
   hideLoader()
+}
+
+function renderTownsSelect(dataT) {
+  var townsSelectTemplate = _.template($('#js-towns-select').html())
+  $('.towns-select').html(townsSelectTemplate({ towns: dataT.data }))
 }
 
 

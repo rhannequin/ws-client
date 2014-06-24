@@ -12,6 +12,7 @@ module.exports = {
   , loadAddPlace: loadAddPlace
   , loadTowns: loadTowns
   , loadTown: loadTown
+  , loadTownsSelect: loadTownsSelect
   , loadCountries: loadCountries
   , loadCountry: loadCountry
 }
@@ -60,6 +61,10 @@ function loadTowns() {
 function loadTown(url) {
   $loader().show()
   apiRequest(url).done(renderers.renderTown)
+}
+
+function loadTownsSelect() {
+  apiRequest('/towns').done(renderers.renderTownsSelect)
 }
 
 
