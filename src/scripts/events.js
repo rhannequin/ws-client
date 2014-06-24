@@ -41,6 +41,9 @@ function showFromMenuEvt(e) {
     case '/countries':
       loaders.loadCountries()
       break
+    case '/countries/add':
+      renderers.renderAddCountry()
+      break
     default:
       loaders.loadHome()
   }

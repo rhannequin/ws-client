@@ -16,6 +16,7 @@ module.exports = {
   , loadTownsSelect: loadTownsSelect
   , loadCountries: loadCountries
   , loadCountry: loadCountry
+  , loadAddCountry: loadAddCountry
   , loadCountriesSelect: loadCountriesSelect
 }
 
@@ -81,6 +82,10 @@ function loadCountry(url) {
   apiRequest(url).done(renderers.renderCountry)
 }
 
+function loadAddCountry(country) {
+  apiRequest('/countries', 'POST', {country: country}).done(loadCountryFromAdd)
+}
+
 function loadCountriesSelect() {
   apiRequest('/countries').done(renderers.renderCountriesSelect)
 }
@@ -96,4 +101,9 @@ function loadPlaceFromAdd(dataP) {
 function loadTownFromAdd(dataT) {
   var id = dataT.data.town_id
   loadTown('/towns/' + id)
+}
+
+function loadCountryFromAdd(dataC) {
+  var id = dataC.data.country_id
+  loadCountry('/countries/' + id)
 }

@@ -10,6 +10,7 @@ module.exports = {
   , showPlace: showPlace
   , addPlaceForm: addPlaceForm
   , addTownForm: addTownForm
+  , addCountryForm: addCountryForm
 }
 
 function placesList() {
@@ -54,6 +55,15 @@ function addTownForm() {
   })
 }
 
+function addCountryForm() {
+  var loaders = require('./loaders')
+    , $form = $('form.add-country')
+  $form.on('submit', function(e) {
+    e.preventDefault()
+    loaders.loadAddCountry(buildCountryFormObj($form))
+  })
+}
+
 
 // Private
 
@@ -90,6 +100,14 @@ function buildTownFormObj($form) {
       name: findInput($form, 'name').val()
     , population: findInput($form, 'population').val()
     , country_id: findInput($form, 'country_id', 'select').val()
+  }
+}
+
+function buildCountryFormObj($form) {
+  return {
+      name: findInput($form, 'name').val()
+    , code: findInput($form, 'code').val()
+    , continent: findInput($form, 'continent').val()
   }
 }
 
