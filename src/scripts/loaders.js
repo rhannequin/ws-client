@@ -12,9 +12,11 @@ module.exports = {
   , loadAddPlace: loadAddPlace
   , loadTowns: loadTowns
   , loadTown: loadTown
+  , loadAddTown: loadAddTown
   , loadTownsSelect: loadTownsSelect
   , loadCountries: loadCountries
   , loadCountry: loadCountry
+  , loadCountriesSelect: loadCountriesSelect
 }
 
 
@@ -40,11 +42,6 @@ function loadPlace(url) {
   apiRequest(url).done(renderers.renderPlace)
 }
 
-function loadPlaceFromAdd(dataP) {
-  var id = dataP.data.place_id
-  loadPlace('/places/' + id)
-}
-
 function loadAddPlace(place) {
   $loader().show()
   apiRequest('/places', 'POST', {place: place}).done(loadPlaceFromAdd)
@@ -63,6 +60,10 @@ function loadTown(url) {
   apiRequest(url).done(renderers.renderTown)
 }
 
+function loadAddTown(town) {
+  apiRequest('/towns', 'POST', {town: town}).done(loadTownFromAdd)
+}
+
 function loadTownsSelect() {
   apiRequest('/towns').done(renderers.renderTownsSelect)
 }
@@ -78,4 +79,21 @@ function loadCountries() {
 function loadCountry(url) {
   $loader().show()
   apiRequest(url).done(renderers.renderCountry)
+}
+
+function loadCountriesSelect() {
+  apiRequest('/countries').done(renderers.renderCountriesSelect)
+}
+
+
+// Private
+
+function loadPlaceFromAdd(dataP) {
+  var id = dataP.data.place_id
+  loadPlace('/places/' + id)
+}
+
+function loadTownFromAdd(dataT) {
+  var id = dataT.data.town_id
+  loadTown('/towns/' + id)
 }

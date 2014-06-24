@@ -15,9 +15,11 @@ module.exports = {
   , renderAddPlace: renderAddPlace
   , renderTowns: renderTowns
   , renderTown: renderTown
+  , renderAddTown: renderAddTown
   , renderTownsSelect: renderTownsSelect
   , renderCountries: renderCountries
   , renderCountry: renderCountry
+  , renderCountriesSelect: renderCountriesSelect
 }
 
 
@@ -92,6 +94,14 @@ function renderTown(dataT) {
   hideLoader()
 }
 
+function renderAddTown(dataT) {
+  var addTownTemplate = _.template($('#js-add-town').html())
+  renderPage('Add a Town', addTownTemplate())
+  updateSidebar('town-add')
+  hideLoader()
+  behavors.addTownForm()
+}
+
 function renderTownsSelect(dataT) {
   var townsSelectTemplate = _.template($('#js-towns-select').html())
   $('.towns-select').html(townsSelectTemplate({ towns: dataT.data }))
@@ -117,6 +127,11 @@ function renderCountry(dataC) {
     , townItemTemplate = _.template($('#js-country-item').html())
   renderPage('Country: ' + country.name, townItemTemplate({ country: country }))
   hideLoader()
+}
+
+function renderCountriesSelect(dataC) {
+  var countriesSelectTemplate = _.template($('#js-countries-select').html())
+  $('.countries-select').html(countriesSelectTemplate({ countries: dataC.data }))
 }
 
 

@@ -35,6 +35,9 @@ function showFromMenuEvt(e) {
     case '/towns':
       loaders.loadTowns()
       break
+    case '/towns/add':
+      renderers.renderAddTown()
+      break
     case '/countries':
       loaders.loadCountries()
       break
