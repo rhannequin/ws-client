@@ -21,34 +21,65 @@ function placesList() {
 }
 
 function showPlace(place) {
-  var latLng = new google.maps.LatLng(place.latitude, place.longitude)
-    , mapOptions = {
-          center: latLng
-        , zoom: 15
-      }
-    , map
-  map = new google.maps.Map(document.getElementById('place-map'), mapOptions)
-  new google.maps.Marker({
-      position: latLng
-    , map: map
-    , title: place.name
-  })
+  showMap('place-map', place.latitude, place.longitude, place.name, true)
 }
 
 function addPlaceForm() {
   var loaders = require('./loaders')
     , $form = $('form.add-place')
-    , place
+  findInput($form, 'address').on('change', function() {
+    getLatLngFromAddress($(this).val(), function(lat, lng) {
+      findInput($form, 'latitude').val(lat)
+      findInput($form, 'longitude').val(lng)
+      showMap('place-map', lat, lng, "Place's address", true)
+    })
+  })
   $form.on('submit', function(e) {
     e.preventDefault()
-    place = {
-        name: $form.find("input[name$='name']").val()
-      , description: $form.find("input[name$='description']").val()
-      , address: $form.find("input[name$='address']").val()
-      , latitude: $form.find("input[name$='latitude']").val()
-      , longitude: $form.find("input[name$='longitude']").val()
-      , town_id: $form.find("input[name$='town_id']").val()
-    }
-    loaders.loadAddPlace(place)
+    loaders.loadAddPlace(buildPlaceFormObj($form))
   })
+}
+
+
+// Private
+
+function showMap(htmlId, lat, lng, name, showMarker) {
+  var latLng = new google.maps.LatLng(lat, lng)
+    , mapOptions = {
+          center: latLng
+        , zoom: 15
+      }
+    , map
+  map = new google.maps.Map(document.getElementById(htmlId), mapOptions)
+  if(typeof name !== 'undefined' && showMarker) {
+    new google.maps.Marker({
+        position: latLng
+      , map: map
+      , title: name
+    })
+  }
+}
+
+function buildPlaceFormObj($form) {
+  return {
+      name: findInput($form, 'name').val()
+    , description: findInput($form, 'description').val()
+    , address: findInput($form, 'address').val()
+    , latitude: findInput($form, 'latitude').val()
+    , longitude: findInput($form, 'longitude').val()
+    , town_id: findInput($form, 'town_id').val()
+  }
+}
+
+function getLatLngFromAddress(address, cb) {
+  new google.maps.Geocoder().geocode({ address: address }, function(results) {
+    if(results.length > 0) {
+      var location = results[0].geometry.location
+      cb(location.k, location.A)
+    }
+  })
+}
+
+function findInput($form, input) {
+  return $form.find("input[name$='" + input + "']")
 }
