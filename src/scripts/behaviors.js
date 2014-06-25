@@ -9,6 +9,7 @@ module.exports = {
     placesList: placesList
   , showPlace: showPlace
   , addPlaceForm: addPlaceForm
+  , addCommentForm: addCommentForm
   , addTownForm: addTownForm
   , addCountryForm: addCountryForm
 }
@@ -42,6 +43,15 @@ function addPlaceForm() {
   $form.on('submit', function(e) {
     e.preventDefault()
     loaders.loadAddPlace(buildPlaceFormObj($form))
+  })
+}
+
+function addCommentForm() {
+  var loaders = require('./loaders')
+    , $form = $('form.add-comment')
+  $form.on('submit', function(e) {
+    e.preventDefault()
+    loaders.loadAddComment(buildCommentFormObj($form))
   })
 }
 
@@ -92,6 +102,15 @@ function buildPlaceFormObj($form) {
     , latitude: findInput($form, 'latitude').val()
     , longitude: findInput($form, 'longitude').val()
     , town_id: findInput($form, 'town_id', 'select').val()
+  }
+}
+
+function buildCommentFormObj($form) {
+  return {
+      author: findInput($form, 'author').val()
+    , mark: parseInt(findInput($form, 'mark').val(), 10)
+    , text: findInput($form, 'text').val()
+    , placeId: parseInt(findInput($form, 'place_id').val(), 10)
   }
 }
 

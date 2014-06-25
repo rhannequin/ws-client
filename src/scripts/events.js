@@ -20,6 +20,7 @@ function launch() {
 
   // Add
   $('body').on('click', '.js-place-add-item', addPlaceEvt)
+  $('body').on('click', '.js-comment-add-item', addCommentEvt)
 }
 
 function showFromMenuEvt(e) {
@@ -71,8 +72,13 @@ function showCountryEvt(e) {
 }
 
 function addPlaceEvt(e) {
-  var href
   e.preventDefault()
-  href = $(e.currentTarget).attr('href')
   renderers.renderAddPlace()
+}
+
+function addCommentEvt(e) {
+  var id
+  e.preventDefault()
+  id = $(e.currentTarget).data('placeid')
+  renderers.renderAddComment(id)
 }

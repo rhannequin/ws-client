@@ -13,6 +13,7 @@ module.exports = {
   , renderPlace: renderPlace
   , renderPlaces: renderPlaces
   , renderAddPlace: renderAddPlace
+  , renderAddComment: renderAddComment
   , renderTowns: renderTowns
   , renderTown: renderTown
   , renderAddTown: renderAddTown
@@ -68,6 +69,12 @@ function renderAddPlace() {
   updateSidebar('place-add')
   hideLoader()
   behavors.addPlaceForm()
+}
+
+function renderAddComment(placeId) {
+  var addCommentTemplate = _.template($('#js-add-comment').html())
+  renderPage('Add a comment', addCommentTemplate({ placeId: placeId }))
+  behavors.addCommentForm()
 }
 
 

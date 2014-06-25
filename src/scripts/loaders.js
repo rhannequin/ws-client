@@ -12,6 +12,7 @@ module.exports = {
   , loadAddPlace: loadAddPlace
   , loadTowns: loadTowns
   , loadTown: loadTown
+  , loadAddComment: loadAddComment
   , loadAddTown: loadAddTown
   , loadTownsSelect: loadTownsSelect
   , loadCountries: loadCountries
@@ -43,16 +44,21 @@ function loadPlace(url) {
   $loader().show()
   apiRequest(url).then(function(dataP) {
     place = dataP.data
-    place.id = 1641// TO REMOVE
     return apiRequest('/places/' + place.id + '/comments')
   }).done(function(dataC) {
-    renderers.renderPlace(place, dataC.data.results)
+    renderers.renderPlace(place, dataC.data)
   })
 }
 
 function loadAddPlace(place) {
   $loader().show()
   apiRequest('/places', 'POST', {place: place}).done(loadPlaceFromAdd)
+}
+
+function loadAddComment(comment) {
+  var url = '/places/' + comment.placeId + '/comments'
+  $loader().show()
+  apiRequest(url, 'POST', {comment: comment}).done(loadPlaceFromAdd)
 }
 
 
