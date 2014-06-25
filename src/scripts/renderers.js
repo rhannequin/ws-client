@@ -41,11 +41,11 @@ function renderHome() {
 
 // PLACES
 
-function renderPlace(dataP) {
-  var place = dataP.data
-    , placeItemTemplate = _.template($('#js-place-item').html())
+function renderPlace(place, comments) {
+  var placeItemTemplate = _.template($('#js-place-item').html())
   renderPage('Place: ' + place.name, placeItemTemplate({
       place: place
+    , comments: comments
     , town: place.town
     , country: place.town.country
   }))

@@ -39,8 +39,15 @@ function loadPlaces(filter) {
 }
 
 function loadPlace(url) {
+  var place = null
   $loader().show()
-  apiRequest(url).done(renderers.renderPlace)
+  apiRequest(url).then(function(dataP) {
+    place = dataP.data
+    place.id = 1641// TO REMOVE
+    return apiRequest('/places/' + place.id + '/comments')
+  }).done(function(dataC) {
+    renderers.renderPlace(place, dataC.data.results)
+  })
 }
 
 function loadAddPlace(place) {

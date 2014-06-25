@@ -180,7 +180,22 @@
           </p>
         </div>
       </div>
-      <div class="gmaps" id="place-map"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="comment">
+        <% _.each(comments, function(comment) { %>
+          <p>
+            <strong><%= comment.author %></strong> <%= comment.mark %>/10
+            <br>
+            <%= comment.comment %>
+          </p>
+        <% }) %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="gmaps" id="place-map"></div>
+      </div>
     </div>
     </script>
 
