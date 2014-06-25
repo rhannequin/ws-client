@@ -1,6 +1,7 @@
 'use strict';
 
-var apiRequest = require('./api')
+var $ = require('jquery')
+  , apiRequest = require('./api')
   , renderers = require('./renderers')
   , selectors = require('./selectors')
   , $loader = selectors.gifLoader
@@ -30,13 +31,20 @@ function loadHome() {
 
 // PLACES
 
-function loadPlaces(filter) {
+function loadPlaces(params) {
   var url = '/places'
-  if(typeof filter !== 'undefined' && filter.length) {
-    url += '?f=' + filter
+  if(typeof params !== 'undefined') {
+    if(params.type === 'filter') {
+      url += '?f=' + params.val
+    } else if(params.type === 'sort') {
+      url += '?s=' + params.item + '&c=' + params.cat
+    }
   }
   $loader().show()
-  apiRequest(url).done(renderers.renderPlaces)
+  $.when(apiRequest(url), apiRequest('/towns'), apiRequest('/countries'))
+  .then(function(resP, resT, resC) {
+    renderers.renderPlaces(resP[0].data, resT[0].data, resC[0].data)
+  })
 }
 
 function loadPlace(url) {

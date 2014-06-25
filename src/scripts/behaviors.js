@@ -17,12 +17,19 @@ module.exports = {
 function placesList() {
   var loaders = require('./loaders')
     , $filterForm = $('.places-form-filter')
+    , $townSortForm = $('form.js-sort-by-town')
+    , $countrySortForm = $('form.js-sort-by-country')
   $filterForm.on('submit', function(e) {
-    var $input
+    var filter
     e.preventDefault()
-    $input = $(e.currentTarget).find('input')
-    loaders.loadPlaces($input.val())
+    filter = {
+        type: 'filter'
+      , val: $(e.currentTarget).find('input').val()
+    }
+    loaders.loadPlaces(filter)
   })
+  $townSortForm.find('select').on('change', sortEvent)
+  $countrySortForm.find('select').on('change', sortEvent)
 }
 
 function showPlace(place) {
@@ -76,6 +83,16 @@ function addCountryForm() {
 
 
 // Private
+
+function sortEvent() {
+  var loaders = require('./loaders')
+    , sort = {
+        type: 'sort'
+      , cat: $(this).parents('form').data('cat')
+      , item: $(this).val()
+    }
+  loaders.loadPlaces(sort)
+}
 
 function showMap(htmlId, lat, lng, name, showMarker) {
   var latLng = new google.maps.LatLng(lat, lng)

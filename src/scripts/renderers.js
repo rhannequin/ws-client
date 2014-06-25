@@ -54,10 +54,13 @@ function renderPlace(place, comments) {
   behavors.showPlace(place)
 }
 
-function renderPlaces(dataP) {
-  var places = dataP.data
-    , placeListTemplate = _.template($('#js-place-list').html())
-  renderPage('Places', placeListTemplate({places: places}))
+function renderPlaces(places, towns, countries) {
+  var placeListTemplate = _.template($('#js-place-list').html())
+  renderPage('Places', placeListTemplate({
+      places: places
+    , towns: towns
+    , countries: countries
+  }))
   updateSidebar('places')
   hideLoader()
   behavors.placesList()
