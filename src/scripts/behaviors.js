@@ -84,12 +84,13 @@ function addCountryForm() {
 
 // Private
 
-function sortEvent() {
+function sortEvent(e) {
   var loaders = require('./loaders')
+    , $el = $(e.currentTarget)
     , sort = {
         type: 'sort'
-      , cat: $(this).parents('form').data('cat')
-      , item: $(this).val()
+      , cat: $el.parents('form').data('cat')
+      , item: $el.val()
     }
   loaders.loadPlaces(sort)
 }

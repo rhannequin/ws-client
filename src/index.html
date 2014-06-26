@@ -130,17 +130,21 @@
       </div>
     </div>
     <div class="row">
-      <% _.each(places, function(place) { %>
-      <div class="col-xs-6 col-sm-3 placeholder">
-        <h4><a class="js-place-item" href="/places/<%= place.id %>"><%= place.name %></a></h4>
-        <p>
-          <span class="text-muted"><%= place.description %></span>
-        </p>
-        <p>
-          <span class="text-muted"><%= place.address %></span>
-        </p>
-      </div>
-      <% }) %>
+      <% if(places.length) { %>
+        <% _.each(places, function(place) { %>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <h4><a class="js-place-item" href="/places/<%= place.id %>"><%= place.name %></a></h4>
+            <p>
+              <span class="text-muted"><%= place.description %></span>
+            </p>
+            <p>
+              <span class="text-muted"><%= place.address %></span>
+            </p>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No Places found.</p>
+      <% } %>
     </div>
     <div class="row">
       <p>
