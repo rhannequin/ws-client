@@ -129,10 +129,13 @@
         </form>
       </div>
     </div>
-    <div class="row">
-      <% if(places.length) { %>
-        <% _.each(places, function(place) { %>
-          <div class="col-xs-6 col-sm-3 placeholder">
+    <% var _len = places.length %>
+    <% if(_len) { %>
+      <% _.each(places, function(place, i) { %>
+        <% if(i%3 === 0) { %>
+        <div class="row">
+        <% } %>
+          <div class="col-xs-4 placeholder">
             <h4><a class="js-place-item" href="/places/<%= place.id %>"><%= place.name %></a></h4>
             <p>
               <span class="text-muted"><%= place.description %></span>
@@ -141,11 +144,13 @@
               <span class="text-muted"><%= place.address %></span>
             </p>
           </div>
-        <% }) %>
-      <% } else { %>
-        <p>No Places found.</p>
-      <% } %>
-    </div>
+        <% if(i%3 === 2 || i === _len - 1) { %>
+        </div>
+        <% } %>
+      <% }) %>
+    <% } else { %>
+      <p>No Places found.</p>
+    <% } %>
     <div class="row">
       <p>
         <a href="/places/add" class="btn btn-primary js-place-add-item">Add a Place</a>
@@ -241,7 +246,7 @@
             <a class="js-town-item" href="/towns/<%= town.id %>"><%= town.name %></a>
           </p>
           <p>
-            Population: <%= town.population %> people
+            Population: <%= town.population.toLocaleString('en-EN') %> people
           </p>
         </div>
         <div class="col-md-6">
@@ -257,6 +262,17 @@
           <a href="/places/<%= place.id %>/comments/add" data-placeid="<%= place.id %>" class="btn btn-primary js-comment-add-item">Add a comment</a>
         </p>
         <% if(comments.length) { %>
+          <% if(comments.length > 1) { %>
+            <h3>Best comment</h3>
+            <p>
+              <% var firstComment = comments[0] %>
+              <% comments.splice(0, 1) %>
+              <strong><%= firstComment.comment %></strong> (<%= firstComment.mark %>/10)
+              <br>
+              From <strong><%= firstComment.author %></strong>
+            </p>
+          <% } %>
+          <h3>Comments</h3>
           <% _.each(comments, function(comment) { %>
             <p class="comment">
               <strong><%= comment.author %></strong> <%= comment.mark %>/10
@@ -278,14 +294,37 @@
 
     <!-- TOWNS -->
 
-    <script id="js-town-item-list" type="text/x-template">
-    <div class="col-xs-6 col-sm-3 placeholder">
-      <p><a class="js-town-item" href="/towns/<%= id %>"><%= name %></a></p>
+    <script id="js-town-list" type="text/x-template">
+    <% var _len = towns.length %>
+    <% if(_len) { %>
+      <% _.each(towns, function(town, i) { %>
+        <% if(i%3 === 0) { %>
+        <div class="row">
+        <% } %>
+          <div class="col-xs-4 placeholder">
+            <h4>
+              <a class="js-town-item" href="/towns/<%= town.id %>"><%= town.name %></a>
+            </h4>
+            <p class="text-muted">
+            <%= town.population.toLocaleString('en-EN') %> people
+            </p>
+          </div>
+        <% if(i%3 === 2 || i === _len - 1) { %>
+        </div>
+        <% } %>
+      <% }) %>
+    <% } else { %>
+      <p>No Towns found.</p>
+    <% } %>
+    <div class="row">
+      <p>
+        <a href="/towns/add" class="btn btn-primary js-town-add-item">Add a Town</a>
+      </p>
     </div>
     </script>
 
     <script id="js-town-item" type="text/x-template">
-    <p>Population: <%= town.population %></p>
+    <p>Population: <%= town.population.toLocaleString('en-EN') %></p>
     <p>Country: <a class="js-country-item" href="/countries/<%= country.id %>"><%= country.name %></a></p>
     </script>
 
@@ -329,9 +368,29 @@
 
     <!-- COUNTRIES -->
 
-    <script id="js-country-item-list" type="text/x-template">
-    <div class="col-xs-6 col-sm-3 placeholder">
-      <p><a class="js-country-item" href="/countries/<%= id %>"><%= name %></a></p>
+    <script id="js-country-list" type="text/x-template">
+    <% var _len = countries.length %>
+    <% if(_len) { %>
+      <% _.each(countries, function(country, i) { %>
+        <% if(i%3 === 0) { %>
+        <div class="row">
+        <% } %>
+          <div class="col-xs-4 placeholder">
+            <h4>
+            <a class="js-country-item" href="/countries/<%= country.id %>"><%= country.name %></a>
+            </h4>
+          </div>
+        <% if(i%3 === 2 || i === _len - 1) { %>
+        </div>
+        <% } %>
+      <% }) %>
+    <% } else { %>
+      <p>No Countries found.</p>
+    <% } %>
+    <div class="row">
+      <p>
+        <a href="/countries/add" class="btn btn-primary js-country-add-item">Add a Country</a>
+      </p>
     </div>
     </script>
 

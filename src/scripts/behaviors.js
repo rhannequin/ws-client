@@ -126,8 +126,8 @@ function buildPlaceFormObj($form) {
 function buildCommentFormObj($form) {
   return {
       author: findInput($form, 'author').val()
-    , mark: parseInt(findInput($form, 'mark').val(), 10)
-    , text: findInput($form, 'text').val()
+    , mark: parseInt(findInput($form, 'mark', 'select').find('option:selected').val(), 10)
+    , text: findInput($form, 'text', 'textarea').val()
     , placeId: parseInt(findInput($form, 'place_id').val(), 10)
   }
 }

@@ -85,12 +85,8 @@ function renderAddComment(placeId) {
 
 function renderTowns(dataT) {
   var towns = dataT.data
-    , townItemListTemplate = _.template($('#js-town-item-list').html())
-    , str = ''
-  $.each(towns, function(i, town) {
-    str += townItemListTemplate(town)
-  })
-  renderPage('Towns', str)
+    , townItemListTemplate = _.template($('#js-town-list').html())
+  renderPage('Towns', townItemListTemplate({towns: towns}))
   updateSidebar('towns')
   hideLoader()
 }
@@ -123,12 +119,8 @@ function renderTownsSelect(dataT) {
 
 function renderCountries(dataC) {
   var countries = dataC.data
-    , townItemListTemplate = _.template($('#js-country-item-list').html())
-    , str = ''
-  $.each(countries, function(i, country) {
-    str += townItemListTemplate(country)
-  })
-  renderPage('Countries', str)
+    , countryItemListTemplate = _.template($('#js-country-list').html())
+  renderPage('Countries', countryItemListTemplate({countries: countries}))
   updateSidebar('countries')
   hideLoader()
 }
