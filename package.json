@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "gulp": "~3.6.2",
-    "jquery": "^2.1.1",
+    "jquery": "^3.0.0",
     "bootstrap-sass": "^3.1.1",
     "bootstrap": "git+https://github.com/twbs/bootstrap.git",
     "lodash": "^2.4.1"
